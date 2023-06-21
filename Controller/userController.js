@@ -1,5 +1,19 @@
 const express = require("express");
 const router = express.Router();
+//importar el modelo userModel
+const User = require("../Model/userModel");
+
+router.get("/", (req, res) => {
+  User.find()
+    .then((data) => {
+      res.status(200).json({ status: "success", data, error: null });
+    })
+    .catch((error) => {
+      res
+        .status(400)
+        .json({ status: "failed", data: null, error: error.message });
+    });
+});
 
 // Obtener todos los usuarios
 router.get("/", (req, res) => {

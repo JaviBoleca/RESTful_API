@@ -24,15 +24,16 @@ const userSchema = new mongoose.Schema({
     required: false,
     default: [],
     validate: [
-      array.length === 0 ||
+        (array) =>
+        array.length === 0 ||
         array.every((element) => {
           const keys = Object.keys(element);
           return (
-            keys.every((keys) => typeof element[keys[0]] === "boolean") &&
+            keys.every(() => typeof element[keys[0]] === "boolean") &&
             typeof element[keys[1]] === "string"
           );
         }),
-      `No se cumple el formato de los skills`,
+      "Wrong skills array",
     ],
   },
   personality: {
