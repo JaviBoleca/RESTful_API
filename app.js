@@ -29,6 +29,9 @@ db.once("connected", () => console.log("connected to database successfully"));
 //si la conexion se pierde nos mostrara un mensaje
 db.on("disconnected", () => console.log("disconnected to database"));
 
+const users = require('./Controller/userController');
+app.use('/users', users);
+
 app.listen(port, () => {
   console.log(`server running http://localhost:${port}`);
 });
