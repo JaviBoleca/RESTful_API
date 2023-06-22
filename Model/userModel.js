@@ -24,13 +24,14 @@ const userSchema = new mongoose.Schema({
     required: false,
     default: [],
     validate: [
-        (array) =>
+      (array) =>
         array.length === 0 ||
         array.every((element) => {
           const keys = Object.keys(element);
-          return (
-            keys.every(() => typeof element[keys[0]] === "boolean") &&
-            typeof element[keys[1]] === "string"
+          return keys.every(
+            () =>
+              typeof element[keys[0]] === "boolean" &&
+              typeof element[keys[1]] === "string"
           );
         }),
       "Wrong skills array",
@@ -47,7 +48,6 @@ const userSchema = new mongoose.Schema({
     ],
   },
 });
-
 
 //el primer parametro es el nombre del modelo
 //el segundo parametro es el esquema
