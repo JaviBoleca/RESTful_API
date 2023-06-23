@@ -15,7 +15,7 @@ const mongourl = process.env.DATABASE_URL_DEV;
 
 //configuracion con mongodb
 //useNewUrlParser le indica a mongoose que use el nuevo analizador de URL dela cadena de conexion
-mongoose.connect(mongourl, {useNewUrlParser: true});
+mongoose.connect(mongourl, { useNewUrlParser: true });
 
 // guardar la conexion en una variable
 const db = mongoose.connection;
@@ -29,8 +29,11 @@ db.once("connected", () => console.log("connected to database successfully"));
 //si la conexion se pierde nos mostrara un mensaje
 db.on("disconnected", () => console.log("disconnected to database"));
 
-const users = require('./Controller/userController');
-app.use('/users', users);
+const users = require("./Controller/userController");
+const clothes = require("./Controller/clothesController");
+
+app.use("/users", users);
+app.use("/clothes", clothes);
 
 app.listen(port, () => {
   console.log(`server running http://localhost:${port}`);
